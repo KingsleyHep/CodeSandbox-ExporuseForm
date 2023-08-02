@@ -1,56 +1,67 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import "../styles.css";
 
 export default function ContactDetails() {
-  const [formData, setFormData] = useState({
-    telephone: "",
-    address: ""
+  const [formData, setFormData] = useState(null);
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    defaultValues: { telephone: "", address: "" },
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  const onSubmit = (data) => {
+    // Send data to show submission useCallback or any other action
+    console.log("contact details are ");
+    console.log(data);
+    //!setFormData updates the state of formData to use the data from the form
+    setFormData(data);
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    //send data to show submission
-    console.log("The contact details are: ");
-    console.log(formData);
-  };
-
+  //? errors ARE displayed on screen when required fields are not filled in
+  console.log("errors", errors);
   return (
     <div className="App">
       <nav>
         <h1>ContactDetails</h1>
       </nav>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>
             Telephone Number:
             <input
-              type="tel"
+              type="text"
               name="telephone"
-              value={formData.telephone}
-              onChange={handleChange}
+              {...register("telephone", {
+                required: true,
+                pattern: /^[0-9]+$/i,
+              })}
             />
           </label>
+          {errors.telephone && <p>This field is required</p>}
         </div>
         <div>
           <label>
             Address (UK Format):
             <input
-              type="text"
               name="address"
-              value={formData.address}
-              onChange={handleChange}
+              {...register("address", { required: true })}
             />
           </label>
+          {errors.address && <p>This field is required</p>}
         </div>
-        <button type="submit" onSubmit={handleSubmit}>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
+      {formData && (
+        <div className="object-display">
+          <text>Current data stored in the object is:</text>
+          <br />
+          <text>{JSON.stringify(formData)}</text>
+        </div>
+      )}
     </div>
   );
 }

@@ -16,6 +16,14 @@ export default function ShowSubmission() {
           All good!
         </button>
       </form>
+
+     {/* 
+     needs to be fixed once form data passed as props
+     <div className="object-display">
+  <text>Current data stored in the object is:</text>
+  <br />
+  <text>{JSON.stringify(formData)}</text>
+</div> */}
     </div>
   );
 }

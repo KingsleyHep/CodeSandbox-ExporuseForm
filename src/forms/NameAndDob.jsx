@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-//import App from "../App";
 import "../styles.css";
 
 export default function NameAndDob() {
-  //grab this formData for ShowSubmission
+  const [formData, setFormData] = useState(null);
 
-  const { register, handleSubmit, errors } = useForm({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
     mode: "onSubmit",
-    defaultValues: { title: "", forename: "", surname: "", dob: "" }
+    defaultValues: { title: "", forename: "", surname: "", dob: "" },
   });
 
   const onSubmit = (data) => {
     // Send data to show submission useCallback or any other action
     console.log("name and dob are: ");
     console.log(data);
+    //!setFormData updates the state of formData to use the data from the form
+    setFormData(data);
   };
-
+  //?errors not displayed on screen when required fields are not filled in
   console.log("errors", errors);
   return (
     <div className="App">
@@ -24,10 +29,10 @@ export default function NameAndDob() {
         <h1>Name And DOB</h1>
       </nav>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* <div>
+        <div>
           <label>
             Title:
-            <select name="title" ref={register}>
+            <select name="title" {...register("title", { required: true })}>
               <option value="">Select a title</option>
               <option value="Mr">Mr</option>
               <option value="Mrs">Mrs</option>
@@ -38,7 +43,7 @@ export default function NameAndDob() {
               <option value="RH">RH</option>
             </select>
           </label>
-        </div> */}
+        </div>
         <div>
           <label>
             Forename:
@@ -47,7 +52,7 @@ export default function NameAndDob() {
               name="forename"
               {...register("forename", {
                 required: true,
-                pattern: /^[A-Za-z]+$i/
+                pattern: /^[A-Za-z]+$/i,
               })}
             />
           </label>
@@ -61,7 +66,7 @@ export default function NameAndDob() {
               name="surname"
               {...register("surname", {
                 required: true,
-                pattern: /^[A-Za-z]+$/
+                pattern: /^[A-Za-z]+$/,
               })}
             />
           </label>
@@ -74,6 +79,13 @@ export default function NameAndDob() {
         </div>
         <button type="submit">Submit</button>
       </form>
+      {formData && (
+        <div className="object-display">
+          <text>Current data stored in the object is:</text>
+          <br />
+          <text>{JSON.stringify(formData)}</text>
+        </div>
+      )}
     </div>
   );
 }

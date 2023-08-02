@@ -1,0 +1,29 @@
+.App {
+  font-family: arial, sans-serif;
+  text-align: center;
+}
+
+nav {
+  background-color: #491224;
+}
+
+h1 {
+  font-weight: bold;
+  color: white;
+}
+
+input,
+textarea {
+  background-color: #df386f;
+}
+
+label {
+  text-align: left;
+  color: black;
+}
+.navigation-buttons {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}

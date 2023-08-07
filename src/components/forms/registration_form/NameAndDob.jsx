@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 export default function NameAndDob({ onSubmit, formData }) {
-  const [toggleShow, setToggleShow] = useState(false);
   const {
     handleSubmit,
     register,

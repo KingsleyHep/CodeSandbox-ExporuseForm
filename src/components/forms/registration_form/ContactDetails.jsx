@@ -1,25 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-
-export default function ContactDetails({ telephone, address }) {
-  const [formData, setFormData] = useState(null);
-
+import { DevTool } from "@hookform/devtools";
+export default function ContactDetails({ onSubmit, formData }) {
   const {
     handleSubmit,
     register,
+    control,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
-    defaultValues: { telephone: "", address: "" },
+    defaultValues: {
+      telephone: formData.telephone ?? "",
+      address: formData.address ?? "",
+    },
   });
 
-  const onSubmit = (data) => {
-    // Send data to show submission useCallback or any other action
-    setFormData(data);
-    //!setFormData updates the state of formData to use the data from the form
-  };
-
-  console.log("errors", errors);
   return (
     <div className="App">
       <nav>
@@ -52,6 +47,7 @@ export default function ContactDetails({ telephone, address }) {
         </div>
         <button type="submit">Submit</button>
       </form>
+      <DevTool control={control} />
       {formData && (
         <div className="object-display">
           <text>Current data stored in the object is:</text>

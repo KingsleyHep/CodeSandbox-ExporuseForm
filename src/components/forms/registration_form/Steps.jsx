@@ -1,3 +1,4 @@
+import React from "react";
 import NameAndDob from "./NameAndDob";
 import ContactDetails from "./ContactDetails";
 import ShowSubmission from "./ShowSubmission";
@@ -13,6 +14,11 @@ const Steps = ({ step, onSubmit, formData }) => {
         onSubmit={onSubmit}
         formData={formData}
         title={formData.title}
+        forename={formData.forename}
+        surname={formData.surname}
+        dob={formData.dob}
+        telephone={formData.telephone}
+        address={formData.address}
       />
     );
   }

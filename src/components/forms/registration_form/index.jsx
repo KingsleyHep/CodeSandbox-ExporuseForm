@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import Steps from "./Steps";
 
+// todo change when final splash page added
 const maxSteps = 3;
 
 const RegistrationForm = () => {
-  const [toggleShow, setToggleShow] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({});
 

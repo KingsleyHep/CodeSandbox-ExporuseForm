@@ -1,6 +1,13 @@
-import NameAndDob from "./NameAndDob";
-import ContactDetails from "./ContactDetails";
+import React from "react";
 
+//! wasted time with NeDB
+//todo - create write out to text file locally
+
+//todo - create test output on hardrive - then separate into storage component
+
+//todo - create a new database
+//todo - fetch data from NameAndDob and ContactDetails stored in database
+//todo - display data from database in another component
 export default function ShowSubmission({
   title,
   forename,
@@ -9,11 +16,9 @@ export default function ShowSubmission({
   telephone,
   address,
 }) {
-  //declare variables here
-  //useCallback to fetch data from NameAndDob and ContactDetails
   const handleSubmit = (e) => {
     e.preventDefault();
-    //send data to mock server
+    // Output to json file
   };
 
   return (
